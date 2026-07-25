@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Loan EMI Calculator</title>
+</head>
+<body>
+
+<h2>Bank Loan Application Form</h2>
+
+<form onsubmit="calculateEMI(); return false;">
+    <table border="1" cellpadding="5">
+        <tr>
+            <td>Customer Name:</td>
+            <td><input type="text" id="name" required></td>
+        </tr>
+
+        <tr>
+            <td>Occupation:</td>
+            <td><input type="text" id="occupation" required></td>
+        </tr>
+
+        <tr>
+            <td>Loan Amount (₹):</td>
+            <td><input type="number" id="loan" required></td>
+        </tr>
+
+        <tr>
+            <td>Rate of Interest (% p.a.):</td>
+            <td><input type="number" id="rate" step="0.01" required></td>
+        </tr>
+
+        <tr>
+            <td>Tenure (Years):</td>
+            <td><input type="number" id="tenure" required></td>
+        </tr>
+
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="Calculate EMI">
+            </td>
+        </tr>
+    </table>
+</form>
+
+<br>
+
+<div id="result"></div>
+
+<script>
+function calculateEMI() {
+    var name = document.getElementById("name").value;
+    var occupation = document.getElementById("occupation").value;
+    var principal = parseFloat(document.getElementById("loan").value);
+    var annualRate = parseFloat(document.getElementById("rate").value);
+    var years = parseInt(document.getElementById("tenure").value);
+
+    var r = annualRate / (12 * 100);
+    var n = years * 12;
+
+    var emi = (principal * r * Math.pow(1 + r, n)) /
+              (Math.pow(1 + r, n) - 1);
+
+    var totalPayment = emi * n;
+    var totalInterest = totalPayment - principal;
+
+    document.getElementById("result").innerHTML =
+        "<h3>EMI Information</h3>" +
+        "Name: " + name + "<br>" +
+        "Occupation: " + occupation + "<br>" +
+        "Loan Amount: ₹" + principal.toFixed(2) + "<br>" +
+        "Monthly EMI: ₹" + emi.toFixed(2) + "<br>" +
+        "Total Payment: ₹" + totalPayment.toFixed(2) + "<br>" +
+        "Total Interest: ₹" + totalInterest.toFixed(2);
+}
+</script>
+
+</body>
+</html>
