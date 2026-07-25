@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Job Registration Form</title>
+    </head>
+    <body bgcolor="tan">
+        <center>
+        <div class="Container">
+            <h2 align="center">Job Registration</h2>
+            <label>Name</label>
+            <input type="text" id="name"><br>
+            <label>Email</label>
+            <input typr="text" id="email"><br>
+            <label>Phone</label>
+            <input type="text" id="phone"><br>
+            <button onclick="validateForm()">Register</button>
+            <p id="msg"></p>
+        </div>
+        </center>
+        <script>
+            function validateForm()
+            {
+                var name=document.getElementById("name").value.trim();
+                var email=document.getElementById("email").value.trim();
+                var phone=document.getElementById("phone").value.trim();
+                var nameReg=/^[A-Za-z][A-Za-z0-9]{2,19}$/;
+                var emailReg=/^[A-Za-z0-9._%+-]+@[A-Za-z0-9._]+\.[A-Za-z]{2,}$/;
+                var phoneReg=/^[6-9][0-9]{9}$/;
+                if(!nameReg.test(name)){
+                    document.getElementById("msg").innerHTML="Invalid Name";
+                    document.getElementById("msg").style.color="red";
+                    return;
+                }
+                if(!emailReg.test(email)){
+                    document.getElementById("msg").innerHTML="Invalid Email";
+                    document.getElementById("msg").style.color="red";
+                    return;
+                }
+                if(!phoneReg.test(phone)){
+                    document.getElementById("msg").innerHTML="Invalid Phone";
+                    document.getElementById("msg").style.color="red";
+                    return;
+                }
+                document.getElementById("msg").innerHTML="Registered Successfully";
+                document.getElementById("msg").style.color="green";
+            }
+        </script>
+    </body>
+</html>
